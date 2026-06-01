@@ -33,8 +33,14 @@ aplicacion.engine('hbs', engine({
 aplicacion.set('view engine', 'hbs');
 aplicacion.set('views', ruta.join(__dirname, 'views'));
 
-// CORS para el frontend Vue
-aplicacion.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// CORS para el frontend Vue (configurable via CORS_ORIGIN, acepta múltiples separados por coma)
+const origenesCors = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+    .split(',')
+    .map(o => o.trim());
+aplicacion.use(cors({
+    origin: origenesCors.length === 1 ? origenesCors[0] : origenesCors,
+    credentials: true
+}));
 
 // Middlewares de parseo y archivos estáticos
 aplicacion.use(express.urlencoded({ extended: true }));
@@ -65,7 +71,7 @@ aplicacion.use('/chat', verificarSesion, rutasChat);
 configurarSocket(servidor);
 
 // Inicio del servidor
-const PUERTO = process.env.PUERTO || 3000;
+const PUERTO = process.env.PORT || process.env.PUERTO || 3000;
 servidor.listen(PUERTO, () => {
     console.log(`Servidor iniciado en http://localhost:${PUERTO}`);
 });
