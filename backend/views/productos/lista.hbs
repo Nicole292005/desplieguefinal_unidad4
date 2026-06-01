@@ -1,0 +1,37 @@
+<div class="contenedor-pagina">
+    <div class="cabecera-pagina">
+        <h2>Mis Productos</h2>
+        <a href="/productos/crear" class="boton boton-crear">+ Agregar producto</a>
+    </div>
+
+    {{#if productos.length}}
+        <div class="productos-grilla">
+            {{#each productos}}
+            <div class="producto-tarjeta">
+                {{#if imagen}}
+                    <img src="/uploads/{{imagen}}" alt="{{nombre}}" class="producto-tarjeta-imagen">
+                {{else}}
+                    <div class="producto-tarjeta-sin-imagen">Sin imagen</div>
+                {{/if}}
+
+                <div class="producto-tarjeta-cuerpo">
+                    <p class="producto-tarjeta-nombre">{{nombre}}</p>
+                    <p class="producto-tarjeta-precio">${{precio}}</p>
+                    <p class="producto-tarjeta-descripcion">{{descripcion}}</p>
+                </div>
+
+                <div class="producto-tarjeta-acciones">
+                    <a href="/productos/editar/{{_id}}" class="boton boton-editar">Editar</a>
+                    <a href="/productos/eliminar/{{_id}}" class="boton boton-eliminar"
+                       onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="mensaje-vacio">
+            <p>No hay productos registrados.</p>
+            <a href="/productos/crear" class="boton boton-crear">Crear el primer producto</a>
+        </div>
+    {{/if}}
+</div>

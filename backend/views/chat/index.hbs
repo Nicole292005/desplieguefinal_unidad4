@@ -1,0 +1,50 @@
+<div class="contenedor-chat">
+    <h2>Chat en Tiempo Real</h2>
+    <p class="usuario-conectado">Conectado como: <strong>{{nombreUsuario}}</strong></p>
+
+    <div id="mensajes" class="caja-mensajes"></div>
+
+    <div class="controles-chat">
+        <input type="text" id="entradaMensaje" class="entrada-mensaje" placeholder="Escribe un mensaje..." autocomplete="off">
+        <button id="botonEnviar" class="boton boton-principal">Enviar</button>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const nombreUsuario = '{{nombreUsuario}}';
+    const socket = io();
+    const cajaMensajes = document.getElementById('mensajes');
+    const entradaMensaje = document.getElementById('entradaMensaje');
+    const botonEnviar = document.getElementById('botonEnviar');
+
+    socket.on('mensajeChat', (datos) => {
+        const elemento = document.createElement('div');
+        elemento.classList.add('mensaje', 'mensaje-recibido');
+        elemento.innerHTML = `<span class="nombre-remitente">${datos.usuario}:</span> ${datos.texto}`;
+        cajaMensajes.appendChild(elemento);
+        cajaMensajes.scrollTop = cajaMensajes.scrollHeight;
+    });
+
+    const enviarMensaje = () => {
+        const texto = entradaMensaje.value.trim();
+        if (!texto) return;
+
+        const datos = { usuario: nombreUsuario, texto };
+
+        const elemento = document.createElement('div');
+        elemento.classList.add('mensaje', 'mensaje-propio');
+        elemento.innerHTML = `<span class="nombre-remitente">Tú:</span> ${texto}`;
+        cajaMensajes.appendChild(elemento);
+        cajaMensajes.scrollTop = cajaMensajes.scrollHeight;
+
+        socket.emit('mensajeChat', datos);
+        entradaMensaje.value = '';
+    };
+
+    botonEnviar.addEventListener('click', enviarMensaje);
+
+    entradaMensaje.addEventListener('keypress', (evento) => {
+        if (evento.key === 'Enter') enviarMensaje();
+    });
+</script>

@@ -1,0 +1,673 @@
+/* ===== GENERAL ===== */
+
+/* Reset de márgenes y box-sizing para todos los elementos */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Fondo blanco puro con texto oscuro */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #fff;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Quita el subrayado y hereda el color en todos los enlaces */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===== BARRA DE NAVEGACIÓN ===== */
+
+/* Nav sólida roja sin gradiente, con línea inferior de acento */
+.barra-navegacion {
+    background-color: #8b1a1a;
+    padding: 0 32px;
+    border-bottom: 3px solid #e53935;
+    position: relative;
+}
+
+/* Contenedor centrado con altura fija */
+.nav-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+/* Logo con fondo blanco semitransparente y texto rojo */
+.nav-titulo {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #8b1a1a;
+    padding: 5px 14px;
+    border-radius: 4px;
+}
+
+/* Agrupa los enlaces del menú */
+.nav-enlaces {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Saludo al usuario en la nav */
+.nav-saludo {
+    color: #ffcdd2;
+    font-size: 0.85rem;
+    padding: 0 8px;
+}
+
+/* Enlace base del menú con subrayado animado */
+.nav-link {
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+/* Fondo blanco translúcido al pasar el cursor */
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Enlace de cerrar sesión diferenciado con borde */
+.nav-logout {
+    color: #ffcdd2;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-logout:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    color: #fff;
+}
+
+/* Botón hamburguesa — oculto en escritorio */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+
+/* Cada línea del icono hamburguesa */
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+
+/* Área central con fondo gris muy claro para separar del nav */
+.contenido-principal {
+    max-width: 1200px;
+    width: 100%;
+    margin: 36px auto;
+    padding: 0 32px;
+    flex: 1;
+}
+
+/* ===== FOOTER ===== */
+
+/* Footer rojo oscuro, separado del contenido por un margen */
+.pie-pagina {
+    background-color: #8b1a1a;
+    border-top: 3px solid #e53935;
+    color: #ffcdd2;
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 0.82rem;
+    margin-top: auto;
+    letter-spacing: 0.5px;
+}
+
+/* ===== FORMULARIOS ===== */
+
+/* Tarjeta con barra roja superior en lugar de sombra grande */
+.contenedor-formulario {
+    background-color: #fff;
+    max-width: 460px;
+    margin: 0 auto;
+    border-radius: 6px;
+    border-top: 4px solid #e53935;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 36px 40px;
+}
+
+/* Título centrado del formulario */
+.contenedor-formulario h2 {
+    margin-bottom: 26px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #8b1a1a;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+/* Agrupa label + input en columna */
+.grupo-campo {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Etiqueta en mayúsculas pequeñas */
+.grupo-campo label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+/* Inputs y textareas con bordes redondeados */
+.grupo-campo input,
+.grupo-campo textarea,
+.grupo-campo select {
+    padding: 10px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    background-color: #fafafa;
+}
+
+/* Borde rojo al hacer foco */
+.grupo-campo input:focus,
+.grupo-campo textarea:focus {
+    outline: none;
+    border-color: #e53935;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+}
+
+/* El textarea solo se redimensiona verticalmente */
+.grupo-campo textarea {
+    resize: vertical;
+}
+
+/* Texto de ayuda pequeño */
+.texto-ayuda {
+    font-size: 0.78rem;
+    color: #aaa;
+}
+
+/* Fila de botones al pie del formulario */
+.grupo-botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* Párrafo de enlace secundario */
+.texto-enlace {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 0.88rem;
+    color: #888;
+}
+
+.texto-enlace a {
+    color: #c62828;
+    font-weight: 700;
+}
+
+.texto-enlace a:hover {
+    text-decoration: underline;
+}
+
+/* ===== BOTONES ===== */
+
+/* Base de todos los botones — forma de píldora */
+.boton {
+    display: inline-block;
+    padding: 9px 22px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.3px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.boton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.boton:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Botón principal rojo sólido */
+.boton-principal {
+    background-color: #e53935;
+    color: #fff;
+    width: 100%;
+}
+
+.boton-principal:hover {
+    background-color: #c62828;
+}
+
+/* Botón secundario con borde, sin relleno */
+.boton-secundario {
+    background-color: transparent;
+    color: #555;
+    border: 1.5px solid #ddd;
+    flex: 1;
+    text-align: center;
+}
+
+.boton-secundario:hover {
+    background-color: #f5f5f5;
+    border-color: #bbb;
+}
+
+/* Botón de crear con fondo rojo oscuro */
+.boton-crear {
+    background-color: #8b1a1a;
+    color: #fff;
+}
+
+.boton-crear:hover {
+    background-color: #6d1414;
+}
+
+/* Botón de editar naranja */
+.boton-editar {
+    background-color: #ef6c00;
+    color: #fff;
+    padding: 7px 18px;
+    font-size: 0.82rem;
+    flex: 1;
+    text-align: center;
+}
+
+/* Botón de eliminar rojo con borde */
+.boton-eliminar {
+    background-color: transparent;
+    color: #c62828;
+    border: 1.5px solid #c62828;
+    padding: 7px 18px;
+    font-size: 0.82rem;
+    flex: 1;
+    text-align: center;
+}
+
+.boton-eliminar:hover {
+    background-color: #c62828;
+    color: #fff;
+}
+
+/* ===== LISTA DE PRODUCTOS ===== */
+
+/* Contenedor principal de la página de productos */
+.contenedor-pagina {
+    background-color: transparent;
+}
+
+/* Cabecera con título y botón de crear */
+.cabecera-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f5f5f5;
+}
+
+/* Título de sección con línea izquierda roja */
+.cabecera-pagina h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #222;
+    padding-left: 12px;
+    border-left: 4px solid #e53935;
+}
+
+/* Lista vertical de tarjetas horizontales */
+.productos-grilla {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tarjeta horizontal: imagen izquierda, info centro, acciones derecha */
+.producto-tarjeta {
+    background-color: #fff;
+    border: 1.5px solid #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Borde rojo y sombra suave al pasar el cursor */
+.producto-tarjeta:hover {
+    border-color: #e53935;
+    box-shadow: 0 4px 16px rgba(229, 57, 53, 0.1);
+}
+
+/* Imagen cuadrada a la izquierda */
+.producto-tarjeta-imagen {
+    width: 110px;
+    min-height: 110px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Placeholder cuando no hay imagen */
+.producto-tarjeta-sin-imagen {
+    width: 110px;
+    min-height: 110px;
+    background-color: #fce4ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e57373;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Cuerpo con nombre, precio y descripción */
+.producto-tarjeta-cuerpo {
+    padding: 14px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Nombre del producto */
+.producto-tarjeta-nombre {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* Precio en rojo destacado */
+.producto-tarjeta-precio {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e53935;
+}
+
+/* Descripción en gris con límite de una línea */
+.producto-tarjeta-descripcion {
+    font-size: 0.85rem;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+
+/* Acciones alineadas a la derecha dentro de la tarjeta */
+.producto-tarjeta-acciones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 16px;
+    border-left: 1.5px solid #f0f0f0;
+    min-width: 120px;
+}
+
+/* Vista previa de imagen en formulario de edición */
+.imagen-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Texto "Imagen actual:" */
+.etiqueta-imagen {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+/* Mensaje cuando no hay productos */
+.mensaje-vacio {
+    text-align: center;
+    padding: 60px 0;
+    color: #bbb;
+}
+
+.mensaje-vacio p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+/* ===== ALERTAS ===== */
+
+/* Caja de errores con borde izquierdo rojo */
+.alerta-error {
+    background-color: #fff5f5;
+    color: #b71c1c;
+    border-left: 4px solid #e53935;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    font-size: 0.88rem;
+}
+
+/* ===== CHAT ===== */
+
+/* Tarjeta del chat con borde superior rojo */
+.contenedor-chat {
+    background-color: #fff;
+    max-width: 680px;
+    margin: 0 auto;
+    border-radius: 6px;
+    border-top: 4px solid #e53935;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 28px 32px;
+}
+
+/* Título del chat */
+.contenedor-chat h2 {
+    color: #8b1a1a;
+    margin-bottom: 4px;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+/* Nombre del usuario conectado */
+.usuario-conectado {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 18px;
+}
+
+/* Área de mensajes con scroll */
+.caja-mensajes {
+    height: 340px;
+    overflow-y: auto;
+    border: 1.5px solid #f0f0f0;
+    border-radius: 6px;
+    padding: 12px 14px;
+    background-color: #fafafa;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Burbuja base de mensaje */
+.mensaje {
+    padding: 8px 14px;
+    border-radius: 16px;
+    max-width: 75%;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+/* Mensaje recibido: fondo gris claro, izquierda */
+.mensaje-recibido {
+    background-color: #f0f0f0;
+    color: #222;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+/* Mensaje propio: rojo sólido, derecha */
+.mensaje-propio {
+    background-color: #e53935;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+/* Nombre del remitente en negrita */
+.nombre-remitente {
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+/* Fila con campo de texto y botón enviar */
+.controles-chat {
+    display: flex;
+    gap: 10px;
+}
+
+/* Input del mensaje */
+.entrada-mensaje {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background-color: #fafafa;
+}
+
+.entrada-mensaje:focus {
+    outline: none;
+    border-color: #e53935;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+}
+
+/* Botón enviar con ancho automático */
+.controles-chat .boton-principal {
+    width: auto;
+    padding: 10px 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    /* Muestra el botón hamburguesa en móvil */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Menú colapsado por defecto */
+    .nav-enlaces {
+        display: none;
+        position: absolute;
+        top: 63px;
+        left: 0;
+        right: 0;
+        background-color: #8b1a1a;
+        border-top: 1px solid rgba(255,255,255,0.15);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 24px 16px;
+        gap: 4px;
+        z-index: 100;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Menú visible al activar el toggle */
+    .nav-enlaces.activo {
+        display: flex;
+    }
+
+    .contenido-principal {
+        padding: 0 16px;
+        margin: 24px auto;
+    }
+
+    .contenedor-formulario {
+        padding: 24px 20px;
+    }
+
+    /* Cabecera en columna en móvil */
+    .cabecera-pagina {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    /* Tarjeta más compacta en móvil */
+    .producto-tarjeta-imagen,
+    .producto-tarjeta-sin-imagen {
+        width: 80px;
+        min-height: 80px;
+    }
+
+    .producto-tarjeta-descripcion {
+        display: none;
+    }
+
+    .producto-tarjeta-acciones {
+        min-width: 90px;
+        padding: 10px;
+    }
+
+    .caja-mensajes {
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .barra-navegacion {
+        padding: 0 16px;
+    }
+
+    .contenedor-formulario {
+        padding: 20px 16px;
+    }
+
+    .nav-titulo {
+        font-size: 0.85rem;
+        padding: 4px 10px;
+    }
+}

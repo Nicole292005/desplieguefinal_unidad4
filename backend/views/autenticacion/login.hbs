@@ -1,0 +1,26 @@
+<div class="contenedor-formulario">
+    <h2>Iniciar Sesión</h2>
+
+    {{#if errores}}
+        <div class="alerta-error">
+            {{#each errores}}
+                <p>{{msg}}</p>
+            {{/each}}
+        </div>
+    {{/if}}
+
+    <form action="/login" method="POST">
+        <div class="grupo-campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" value="{{correo}}" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+
+        <div class="grupo-campo">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Tu contraseña" required>
+        </div>
+
+        <button type="submit" class="boton boton-principal">Iniciar sesión</button>
+    </form>
+
+</div>
