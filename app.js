@@ -58,6 +58,15 @@ aplicacion.use(sesion({
 // Pasar datos del usuario a todas las vistas
 aplicacion.use(pasarUsuarioAVistas);
 
+// Health check
+aplicacion.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Rutas API REST (publicas, sin sesion)
 aplicacion.use('/api/products', rutasApiProductos);
 aplicacion.use('/api/categories', rutasApiCategorias);

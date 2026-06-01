@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MecApp — Documentación de despliegue</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      line-height: 1.65;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-bottom: 1px solid #1e3a5f;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; color: #f1f5f9; }
+    header p  { margin-top: .4rem; color: #94a3b8; font-size: .95rem; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    section { margin-bottom: 3rem; }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #7dd3fc;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-bottom: 1px solid #1e3a5f;
+      padding-bottom: .5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: .35rem .75rem;
+      font-size: .85rem;
+      font-weight: 500;
+      color: #cbd5e1;
+    }
+    .badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+    .badge .dot.blue  { background: #3b82f6; }
+    .badge .dot.green { background: #22c55e; }
+    .badge .dot.amber { background: #f59e0b; }
+
+    .url-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: .75rem;
+    }
+    .url-card .label {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #64748b;
+      margin-bottom: .3rem;
+    }
+    .url-card a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-family: "Fira Code", "Cascadia Code", monospace;
+      font-size: .9rem;
+      word-break: break-all;
+    }
+    .url-card a:hover { text-decoration: underline; }
+    .url-card .desc {
+      margin-top: .35rem;
+      font-size: .82rem;
+      color: #94a3b8;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .stack-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    .stack-card .service {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: .3rem;
+    }
+    .stack-card .role {
+      font-size: .8rem;
+      color: #64748b;
+      margin-bottom: .6rem;
+    }
+    .stack-card ul {
+      padding-left: 1.1rem;
+      font-size: .85rem;
+      color: #94a3b8;
+    }
+    .stack-card ul li { margin-bottom: .2rem; }
+
+    .alert {
+      background: #1c2b1e;
+      border-left: 3px solid #22c55e;
+      border-radius: 4px;
+      padding: .75rem 1rem;
+      font-size: .875rem;
+      color: #86efac;
+      margin-bottom: 1rem;
+    }
+    .alert.amber {
+      background: #1c1a10;
+      border-left-color: #f59e0b;
+      color: #fcd34d;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .screenshot-card {
+      background: #1e293b;
+      border: 1px dashed #334155;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid #334155;
+    }
+    .screenshot-card .caption {
+      padding: .6rem .9rem;
+      font-size: .8rem;
+      color: #64748b;
+    }
+
+    .env-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .875rem;
+    }
+    .env-table th {
+      background: #1e293b;
+      color: #7dd3fc;
+      text-align: left;
+      padding: .6rem .9rem;
+      border-bottom: 1px solid #334155;
+    }
+    .env-table td {
+      padding: .55rem .9rem;
+      border-bottom: 1px solid #1e293b;
+      color: #cbd5e1;
+      vertical-align: top;
+    }
+    .env-table tr:last-child td { border-bottom: none; }
+    .env-table code {
+      font-family: monospace;
+      background: #0f172a;
+      padding: .1rem .35rem;
+      border-radius: 3px;
+      font-size: .82rem;
+      color: #7dd3fc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .78rem;
+      color: #475569;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MecApp — Documentación de despliegue</h1>
+  <p>Inventario de productos · Vue 3 + Express + MongoDB Atlas</p>
+</header>
+
+<main>
+
+  <!-- ESTADO -->
+  <section>
+    <h2>Estado del sistema</h2>
+    <div class="badge-grid">
+      <span class="badge"><span class="dot green"></span>Frontend — Netlify</span>
+      <span class="badge"><span class="dot green"></span>Backend — Railway</span>
+      <span class="badge"><span class="dot amber"></span>Base de datos — MongoDB Atlas</span>
+    </div>
+    <div class="alert">
+      Verificar que el backend está activo visitando el endpoint de health check:
+      <br/>
+      <a href="https://desplieguefinalunidad4-production.up.railway.app/health" target="_blank" style="color:#4ade80;">
+        https://desplieguefinalunidad4-production.up.railway.app/health
+      </a>
+    </div>
+  </section>
+
+  <!-- URLS DESPLEGADAS -->
+  <section>
+    <h2>URLs desplegadas</h2>
+
+    <div class="url-card">
+      <div class="label">Frontend · Netlify</div>
+      <a href="https://iridescent-melomakarona-94644b.netlify.app/" target="_blank">
+        https://iridescent-melomakarona-94644b.netlify.app/
+      </a>
+      <div class="desc">SPA en Vue 3 — Vite build estático servido por Netlify CDN</div>
+    </div>
+
+    <div class="url-card">
+      <div class="label">Backend API · Railway</div>
+      <a href="https://desplieguefinalunidad4-production.up.railway.app/api/categories" target="_blank">
+        https://desplieguefinalunidad4-production.up.railway.app/api/categories
+      </a>
+      <div class="desc">Express + Node.js — desplegado como servicio en Railway</div>
+    </div>
+
+    <div class="url-card">
+      <div class="label">Health Check · Railway</div>
+      <a href="https://desplieguefinalunidad4-production.up.railway.app/health" target="_blank">
+        https://desplieguefinalunidad4-production.up.railway.app/health
+      </a>
+      <div class="desc">Devuelve <code>{"status":"ok","uptime":…,"timestamp":…}</code> — útil para monitoreo</div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section>
+    <h2>Stack de infraestructura</h2>
+    <div class="stack-grid">
+
+      <div class="stack-card">
+        <div class="service">Netlify</div>
+        <div class="role">Frontend (SPA)</div>
+        <ul>
+          <li>Build automático desde GitHub</li>
+          <li>Comando: <code>vite build</code></li>
+          <li>Directorio publicado: <code>frontend/dist</code></li>
+          <li><code>_redirects</code> para rutas de Vue Router</li>
+          <li>Variable de entorno: <code>VITE_API_URL</code></li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="service">Railway</div>
+        <div class="role">Backend (API REST + Socket.io)</div>
+        <ul>
+          <li>Deploy automático desde GitHub</li>
+          <li>Start command: <code>node app.js</code></li>
+          <li>Variables: <code>MONGODB_URI</code>, <code>CORS_ORIGIN</code>, <code>SECRETO_SESION</code></li>
+          <li>Puerto inyectado automáticamente vía <code>PORT</code></li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="service">MongoDB Atlas</div>
+        <div class="role">Base de datos</div>
+        <ul>
+          <li>Cluster M0 (free tier)</li>
+          <li><strong>Región: misma que Railway</strong> para minimizar latencia</li>
+          <li>Conexión vía <code>MONGODB_URI</code> en Railway</li>
+          <li>IP de Railway en allowlist de Atlas</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VARIABLES DE ENTORNO -->
+  <section>
+    <h2>Variables de entorno</h2>
+
+    <p style="font-size:.85rem;color:#64748b;margin-bottom:1rem;">Configuradas directamente en el panel de cada servicio — nunca en el repositorio.</p>
+
+    <table class="env-table">
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Variable</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Railway</td>
+          <td><code>MONGODB_URI</code></td>
+          <td>URI de conexión a MongoDB Atlas</td>
+        </tr>
+        <tr>
+          <td>Railway</td>
+          <td><code>CORS_ORIGIN</code></td>
+          <td>URL del frontend en Netlify</td>
+        </tr>
+        <tr>
+          <td>Railway</td>
+          <td><code>SECRETO_SESION</code></td>
+          <td>Clave secreta para express-session</td>
+        </tr>
+        <tr>
+          <td>Netlify</td>
+          <td><code>VITE_API_URL</code></td>
+          <td>URL base del backend en Railway (<code>/api</code>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RUTAS BACKEND -->
+  <section>
+    <h2>Endpoints del backend</h2>
+    <table class="env-table">
+      <thead>
+        <tr><th>Método</th><th>Ruta</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/health</code></td><td>Estado del servidor</td></tr>
+        <tr><td>GET</td><td><code>/api/products</code></td><td>Listar productos</td></tr>
+        <tr><td>GET</td><td><code>/api/products/:id</code></td><td>Obtener producto</td></tr>
+        <tr><td>POST</td><td><code>/api/products</code></td><td>Crear producto</td></tr>
+        <tr><td>PUT</td><td><code>/api/products/:id</code></td><td>Actualizar producto</td></tr>
+        <tr><td>DELETE</td><td><code>/api/products/:id</code></td><td>Eliminar producto</td></tr>
+        <tr><td>GET</td><td><code>/api/categories</code></td><td>Listar categorías</td></tr>
+        <tr><td>GET</td><td><code>/</code></td><td>Login (Handlebars)</td></tr>
+        <tr><td>POST</td><td><code>/login</code></td><td>Iniciar sesión</td></tr>
+        <tr><td>GET</td><td><code>/logout</code></td><td>Cerrar sesión</td></tr>
+        <tr><td>GET / POST</td><td><code>/registro</code></td><td>Registro de usuario</td></tr>
+        <tr><td>GET</td><td><code>/productos</code></td><td>Gestión de productos (web)</td></tr>
+        <tr><td>GET</td><td><code>/chat</code></td><td>Chat en tiempo real</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CAPTURAS -->
+  <section>
+    <h2>Capturas de logs y despliegue</h2>
+    <div class="alert amber">
+      Coloca las imágenes en <code>docs/img/</code> y reemplaza los atributos <code>src</code> de cada tarjeta.
+    </div>
+    <div class="screenshot-grid">
+
+      <div class="screenshot-card">
+        <img src="rail.png" alt="Logs de Railway" onerror="this.style.display='none'" />
+        <div class="caption">Railway — logs del servidor en producción</div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="net.png" alt="Deploy de Netlify" onerror="this.style.display='none'" />
+        <div class="caption">Netlify — deploy exitoso del frontend</div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="region.png" alt="Región de MongoDB Atlas" onerror="this.style.display='none'" />
+        <div class="caption">MongoDB Atlas — región configurada igual que Railway</div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="img/health-check.png" alt="Health check response" onerror="this.style.display='none'" />
+        <div class="caption">Respuesta del endpoint <code>/health</code></div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  MecApp · Despliegue con Netlify, Railway y MongoDB Atlas
+</footer>
+
+</body>
+</html>
