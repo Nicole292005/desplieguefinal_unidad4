@@ -1,64 +1,99 @@
-# MiInventarioExpress
+# MecApp — Gestión de inventario
 
-Aplicacion web de gestion de productos con autenticacion y chat en tiempo real.
+Aplicación web de gestión de productos con autenticación y chat en tiempo real.
+Desplegada con **Netlify** (frontend), **Railway** (backend) y **MongoDB Atlas** (base de datos).
 
 ## Autora
 Nicole Ramos
 
-## Tecnologias utilizadas
-- Node.js
-- Express.js
-- MongoDB Local
-- Mongoose
-- Handlebars
-- Socket.io
-- Multer
-- Bcrypt
-- Express-session
-- Express-validator
+## Links
+
+| | URL |
+|---|---|
+| Frontend | https://iridescent-melomakarona-94644b.netlify.app/ |
+| Backend / Health | https://desplieguefinalunidad4-production.up.railway.app/health |
+| Repositorio | https://github.com/Nicole292005/desplieguefinal_unidad4.git |
+| Documentación | https://nicole292005.github.io/desplieguefinal_unidad4/ |
+
+## Stack
+
+| Capa | Tecnología | Plataforma |
+|---|---|---|
+| Frontend | Vue 3 + Vite + Vue Router + Pinia | Netlify |
+| Backend | Node.js + Express + Socket.io | Railway |
+| Base de datos | MongoDB + Mongoose | MongoDB Atlas |
+| Autenticación | express-session + bcrypt | — |
+| Uploads | Multer | — |
 
 ## Funcionalidades
-- Registro e inicio de sesion de usuarios
-- Gestion de productos (crear, listar, editar, eliminar)
-- Carga de imagenes por producto
-- Validacion de formularios
-- Chat en tiempo real entre usuarios autenticados
 
-## Instalacion
+- Gestión de productos: crear, listar, editar, eliminar
+- Carga de imágenes por producto
+- Validación de formularios
+
+## Variables de entorno
+
+### Backend (Railway)
+
+```
+MONGODB_URI=mongodb+srv://...
+SECRETO_SESION=clave_secreta_aleatoria
+CORS_ORIGIN=https://iridescent-melomakarona-94644b.netlify.app
+```
+
+### Frontend (Netlify)
+
+```
+VITE_API_URL=https://desplieguefinalunidad4-production.up.railway.app/api
+```
+
+## Desarrollo local
 
 1. Clonar el repositorio
-```
-git clone https://github.com/Nicole292005/MiInventarioExpres.git
+
+```bash
+git clone https://github.com/Nicole292005/desplieguefinal_unidad4.git
 ```
 
-2. Instalar dependencias
-```
+2. Instalar dependencias del backend
+
+```bash
 npm install
 ```
 
-3. Configuración (Opcional)
-El sistema utiliza valores por defecto para MongoDB local y el secreto de sesión. Si deseas cambiarlos, crea un archivo `.env` en la carpeta `backend` con:
+3. Crear `.env` en la raíz con los valores locales
+
 ```
-MONGODB_URI=tu_uri_de_mongodb
-PUERTO=3000
-SECRETO_SESION=tu_clave_secreta
+MONGODB_URI=mongodb://127.0.0.1:27017/mecapp
+SECRETO_SESION=clave_local
+CORS_ORIGIN=http://localhost:5173
 ```
 
-4. Ejecutar la semilla para crear usuarios iniciales
-```
+4. Poblar la base de datos (opcional)
+
+```bash
 npm run seed
 ```
 
-5. Iniciar el servidor
-```
-npm start o npm run dev
+5. Iniciar el backend
+
+```bash
+npm run dev
 ```
 
-6. Abrir en el navegador
-```
-http://localhost:3000
+6. Instalar dependencias del frontend e iniciarlo
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-## Usuarios iniciales
-- Correo: nicole@inventario.com | Contrasena: nicole123
-- Correo: invitado@inventario.com | Contrasena: invitado123
+7. Abrir `http://localhost:5173`
+
+## Usuarios iniciales (seed)
+
+| Correo | Contraseña |
+|---|---|
+| nicole@inventario.com | nicole123 |
+| invitado@inventario.com | invitado123 |
